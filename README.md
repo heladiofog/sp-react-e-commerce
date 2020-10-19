@@ -3,7 +3,7 @@ Based on the default scafolding from CRA.
 
 The sitepoint source sample is here: [How to create an e-commerce site with react](https://www.sitepoint.com/how-to-create-an-ecommerce-site-with-react).
 
-### Default CRA README comes below...
+## Default CRA README comes below...
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

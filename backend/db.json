@@ -43,6 +43,14 @@
       "price": 109.99,
       "shortDesc": "Nulla facilisi. Curabitur at lacus ac velit ornare lobortis.",
       "description": "Cras sagittis. Praesent nec nisl a purus blandit viverra. Ut leo. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Fusce a quam."
+    },
+    {
+      "id": "1q6wap6y2mhkgiwbxts",
+      "name": "Shirt",
+      "price": "23",
+      "stock": "3",
+      "shortDesc": "T-Shirt",
+      "description": "Ti Shirt with cats"
     }
   ]
 }

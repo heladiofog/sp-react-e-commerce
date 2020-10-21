@@ -1,5 +1,7 @@
 import React from "react";
 import { Switch, Route, Link, BrowserRouter as Router } from "react-router-dom";
+// Layout
+import Home from "./components/layout/Home";
 // import logo from './logo.svg';
 // import './App.css';
 import AddProduct from "./components/AddProduct";
@@ -24,11 +26,17 @@ export default class App extends React.Component {
     this.routerRef = React.createRef();
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     // loads the last user session from the local storage to the state if it exists
     let user = localStorage.getItem("user");
+    let cart = localStorage.getItem("cart");
+
     user = user ? JSON.parse(user) : null;
-    this.setState({ user });
+    cart = cart ? JSON.parse(cart) : null;
+    // recovering products
+    const products = await axios.get("http://localhost:3001/products");
+    // Setting initial state
+    this.setState({ user, products: products.data });
   }
 
   // Context methods:
@@ -44,7 +52,7 @@ export default class App extends React.Component {
       const { email } = jwt_decode(res.data.accessToken);
       const user = {
         email,
-        token: res.data.accessTokken,
+        token: res.data.accessToken,
         accessLevel: email === "admin@example.com" ? 0 : 1,
       };
 
@@ -64,6 +72,12 @@ export default class App extends React.Component {
     e.preventDefault();
     this.setState({ user: null });
     localStorage.removeItem("user");
+  };
+  // Add Product
+  addProduct = (product, callback) => {
+    let products = this.state.products.slice();
+    products.push(product);
+    this.setState({ products }, () => callback && callback());
   };
 
   render() {
@@ -87,7 +101,7 @@ export default class App extends React.Component {
               aria-label="main navigation"
             >
               <div className="navbar-brand">
-                <Link to="/products" className="navbar-item">
+                <Link to="/" className="navbar-item">
                   <b className="navbar-item is-size-4 ">e-commerce</b>
                 </Link>
                 <label
@@ -140,7 +154,7 @@ export default class App extends React.Component {
               </div>
             </nav>
             <Switch>
-              <Route exact path="/" component={ProductList} />
+              <Route exact path="/" component={Home} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/cart" component={Cart} />
               <Route exact path="/add-product" component={AddProduct} />

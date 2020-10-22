@@ -32,11 +32,11 @@ export default class App extends React.Component {
     let cart = localStorage.getItem("cart");
 
     user = user ? JSON.parse(user) : null;
-    cart = cart ? JSON.parse(cart) : null;
+    cart = cart ? JSON.parse(cart) : {};
     // recovering products
     const products = await axios.get("http://localhost:3001/products");
     // Setting initial state
-    this.setState({ user, products: products.data });
+    this.setState({ user, products: products.data, cart });
   }
 
   // Context methods:
@@ -73,11 +73,65 @@ export default class App extends React.Component {
     this.setState({ user: null });
     localStorage.removeItem("user");
   };
-  // Add Product
+  // Add Product to catalog
   addProduct = (product, callback) => {
     let products = this.state.products.slice();
     products.push(product);
     this.setState({ products }, () => callback && callback());
+  };
+  // Add a product to cart
+  addToCart = (cartItem) => {
+    // Cart is an object instead of an array for an easier data retrieval
+    let cart = this.state.cart;
+
+    if (cart[cartItem.id]) {
+      cart[cartItem.id].amount += cartItem.amount;
+    } else {
+      cart[cartItem.id] = cartItem;
+    }
+    // Stock check: this ensures that the user can’t add more items than are actually available
+    if (cart[cartItem.id].amount > cart[cartItem.id].product.stock) {
+      cart[cartItem.id].amount = cart[cartItem.id].product.stock;
+    }
+    // updating in the local storage
+    localStorage.setItem("cart", JSON.stringify(cart));
+    this.setState({ cart });
+  };
+  // Remove from cart
+  removeFromCart = (cartItemId) => {
+    let cart = this.state.cart;
+    // delete the item from the cart object
+    delete cart[cartItemId];
+    // update local storage
+    localStorage.setItem("cart", JSON.stringify(cart));
+    this.setState({ cart });
+  };
+  // Clean cart
+  clearCart = () => {
+    let cart = {};
+    localStorage.setItem("cart", JSON.stringify(cart));
+    this.setState({ cart });
+  };
+  // Checkout
+  checkout = () => {
+    if (!this.state.user) {
+      this.routerRef.current.history.push("/login");
+      return;
+    }
+
+    const cart = this.state.cart;
+
+    const products = this.state.products.map((p) => {
+      if (cart[p.name]) {
+        p.stock = p.stock - cart[p.name].amount;
+
+        axios.put(`http://localhost:3001/products/${p.id}`, { ...p });
+      }
+      return p;
+    });
+
+    this.setState({ products });
+    this.clearCart();
   };
 
   render() {
@@ -85,7 +139,7 @@ export default class App extends React.Component {
       <Context.Provider
         value={{
           ...this.state,
-          removeFromCArt: this.removeFromCArt,
+          removeFromCart: this.removeFromCart,
           addToCart: this.addToCart,
           login: this.login,
           addProduct: this.addProduct,

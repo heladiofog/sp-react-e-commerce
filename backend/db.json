@@ -15,7 +15,7 @@
     {
       "id": "hdmdu0t80yjkfqselfc",
       "name": "shoes",
-      "stock": 10,
+      "stock": 9,
       "price": 399.99,
       "shortDesc": "Nulla facilisi. Curabitur at lacus ac velit ornare lobortis.",
       "description": "Cras sagittis. Praesent nec nisl a purus blandit viverra. Ut leo. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Fusce a quam."
@@ -23,7 +23,7 @@
     {
       "id": "3dc7fiyzlfmkfqseqam",
       "name": "bags",
-      "stock": 20,
+      "stock": 18,
       "price": 299.99,
       "shortDesc": "Nulla facilisi. Curabitur at lacus ac velit ornare lobortis.",
       "description": "Cras sagittis. Praesent nec nisl a purus blandit viverra. Ut leo. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Fusce a quam."
@@ -31,7 +31,7 @@
     {
       "id": "aoe8wvdxvrkfqsew67",
       "name": "shirts",
-      "stock": 15,
+      "stock": 13,
       "price": 149.99,
       "shortDesc": "Nulla facilisi. Curabitur at lacus ac velit ornare lobortis.",
       "description": "Cras sagittis. Praesent nec nisl a purus blandit viverra. Ut leo. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Fusce a quam."
@@ -47,10 +47,18 @@
     {
       "id": "1q6wap6y2mhkgiwbxts",
       "name": "Shirt",
-      "price": "23",
-      "stock": "3",
+      "price": "23.50",
+      "stock": 1,
       "shortDesc": "T-Shirt",
       "description": "Ti Shirt with cats"
+    },
+    {
+      "id": "oat2hdkg8hkgl2nag1",
+      "name": "Glass",
+      "price": 30.88,
+      "stock": 198,
+      "shortDesc": "Glass for water",
+      "description": "Glass for drinking anything and water"
     }
   ]
 }

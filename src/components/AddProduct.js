@@ -63,7 +63,7 @@ class AddProduct extends Component {
     const { user } = this.props.context;
 
     return !(user && user.accessLevel < 1) ? (
-      // User is admin?
+      // User is not admin
       <Redirect to="/" />
     ) : (
       <>

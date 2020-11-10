@@ -1,7 +1,12 @@
 # sp-react-e-commerce by @helladyo
+
 Based on the default scafolding from CRA.
 
 The sitepoint source sample is here: [How to create an e-commerce site with react](https://www.sitepoint.com/how-to-create-an-ecommerce-site-with-react).
+
+To start server auth fake you need to run:
+
+### `./node_modules/.bin/json-server-auth ./backend/db.json --port 3001\n`
 
 ## Default CRA README comes below...
 
